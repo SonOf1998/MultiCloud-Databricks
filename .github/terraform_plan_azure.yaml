@@ -13,6 +13,7 @@ jobs:
       - name: terraform plan
         run: |
           cd ./azure/infra
+          terraform init
           terraform plan -var "application_client_id=$APPLICATION_ID" -var "subscription_id=$SUBSCRIPTION_ID" -var "directory_tenant_id=$DIRECTORY_ID" -var "client_secret=$CLIENT_SECRET" 
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}

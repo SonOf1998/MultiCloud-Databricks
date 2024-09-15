@@ -13,10 +13,8 @@ jobs:
       - name: terraform plan
         run: |
           cd ./azure/infra
+          export ARM_CLIENT_SECRET=$CLIENT_SECRET
           terraform init
-          terraform plan -var "application_client_id=$APPLICATION_ID" -var "subscription_id=$SUBSCRIPTION_ID" -var "directory_tenant_id=$DIRECTORY_ID" -var "client_secret=$CLIENT_SECRET" 
+          terraform plan -var "client_secret=$CLIENT_SECRET" 
         env:
-          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
-          SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
-          DIRECTORY_ID: ${{ secrets.DIRECTORY_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}

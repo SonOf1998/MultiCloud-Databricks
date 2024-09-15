@@ -5,9 +5,9 @@ terraform {
     container_name       = "infra-tfstate"
     key                  = "sandbox.terraform.tfstate"
 
-    subscription_id = var.subscription_id
-    client_id       = var.application_client_id
-    client_secret   = var.client_secret
-    tenant_id       = var.directory_tenant_id
+    # client_secret is populated by setting ARM_CLIENT_SECRET through GitHub action
+    subscription_id = local.subscription_id
+    client_id       = local.application_client_id
+    tenant_id       = local.directory_tenant_id
   }
 }

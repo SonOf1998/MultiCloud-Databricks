@@ -1,15 +1,4 @@
-variable "application_client_id" {
-  type = string
-}
-
-variable "client_secret" {
-  type = string
-}
-
-variable "subscription_id" {
-  type = string
-}
-
-variable "directory_tenant_id" {
+variable "terraform_client_secret" {
+  description = "The client secret of Terraform Entra ID application."
   type = string
 }

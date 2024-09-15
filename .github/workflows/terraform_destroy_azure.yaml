@@ -1,23 +1,20 @@
-name: Terraform Plan - Azure
+name: Terraform Destroy - Azure
 
-on:
-  pull_request:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
-  terraform_plan_azure:
+  terraform_destroy_azure:
     runs-on: ubuntu-latest
-    name: terraform plan - azure
+    name: terraform destroy - azure
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: terraform plan
+      - name: terraform destroy
         run: |
           cd ./azure/infra
           terraform init
-          terraform plan
+          terraform destroy 
         env:
           ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}

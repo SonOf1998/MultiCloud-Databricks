@@ -8,7 +8,7 @@
 - Save the `Subscription ID` as a **GitHub secret**.
 - Assign the **Owner** role to **Terraform**.
 - Create a resource group, a storage account and a container for `.tfstate` files. Use them in `backend.tf`. 
-- Create `backend.tf` and `providers.tf`.
+- Create `backend.tf`, `providers.tf` and `requirements.tf`.
 - Check `terraform_plan_azure.yaml` to find how credentials are passed.
 
 # Initial setup - Databricks

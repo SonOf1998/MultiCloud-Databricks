@@ -13,8 +13,7 @@ jobs:
       - name: terraform plan
         run: |
           cd ./azure/infra
-          export ARM_CLIENT_SECRET=$CLIENT_SECRET
           terraform init
-          terraform plan -var "client_secret=$CLIENT_SECRET" 
+          terraform plan 
         env:
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}

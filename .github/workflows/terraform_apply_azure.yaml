@@ -1,23 +1,23 @@
-name: Terraform Plan - Azure
+name: Terraform Apply - Azure
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
 jobs:
-  terraform_plan_azure:
+  terraform_apply_azure:
     runs-on: ubuntu-latest
-    name: terraform plan - azure
+    name: terraform apply - azure
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: terraform plan
+      - name: terraform apply
         run: |
           cd ./azure/infra
           terraform init
-          terraform plan
+          terraform apply 
         env:
           ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}

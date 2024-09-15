@@ -14,7 +14,7 @@ jobs:
         run: |
           cd ./azure/infra
           terraform init
-          terraform destroy 
+          terraform destroy -auto-approve
         env:
           ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}

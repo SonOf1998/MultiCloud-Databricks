@@ -17,7 +17,7 @@ jobs:
         run: |
           cd ./azure/infra
           terraform init
-          terraform apply 
+          terraform apply -auto-approve
         env:
           ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}

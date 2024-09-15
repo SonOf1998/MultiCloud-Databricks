@@ -1,4 +1,4 @@
-name: Create terraform plan
+name: Terraform Plan - Azure
 
 on: [pull_request]
 
@@ -7,15 +7,16 @@ permissions:
   pull-requests: write
 
 jobs:
-  plan:
+  terraform_plan_azure:
     runs-on: ubuntu-latest
-    name: Create a plan for an example terraform configuration
+    name: terraform plan - azure
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: terraform plan
         run: |
+          cd ./azure/infra
           terraform plan -var "application_client_id=$APPLICATION_ID" -var "subscription_id=$SUBSCRIPTION_ID" -var "directory_tenant_id=$DIRECTORY_ID" -var "client_secret=$CLIENT_SECRET" 
         env:
           APPLICATION_ID: ${{ secrets.APPLICATION_ID }}

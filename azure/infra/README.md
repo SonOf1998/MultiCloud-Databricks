@@ -5,5 +5,5 @@
 - Save the value field of the client secret as a GitHub secret.
 - Enter your subscription and choose `IAM`.
 - Assign the **Owner** role to **Terraform**.
-- Create a resource group and a storage account for `.tfstate` files. Use them in `backend.tf`. 
-- Create `backend.tf`, `providers.tf`
+- Create a resource group, a storage account and a container for `.tfstate` files. Use them in `backend.tf`. 
+- Create `backend.tf` and `providers.tf`.

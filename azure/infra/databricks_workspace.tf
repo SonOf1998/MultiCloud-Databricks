@@ -1,8 +1,11 @@
 resource "azurerm_databricks_workspace" "databricks_sandbox_workspace" {
-  name                = "Databricks-sandbox"
-  resource_group_name = data.azurerm_resource_group.rg_databricks.name
-  location            = data.azurerm_resource_group.rg_databricks.location
-  sku                 = "premium"
+  name                        = "Databricks-sandbox"
+  resource_group_name         = data.azurerm_resource_group.rg_databricks.name
+  managed_resource_group_name = data.azurerm_resource_group.rg_databricks.name
+  location                    = data.azurerm_resource_group.rg_databricks.location
+  sku                         = "premium"
+
+  depends_on = [ databricks_metastore.main_metastore ]
 }
 
 resource "databricks_mws_permission_assignment" "sandbox_admin_account_group_workspace_assignment" {

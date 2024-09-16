@@ -17,9 +17,11 @@ jobs:
         run: |
           cd ./azure/infra
           terraform init
-          terraform plan
+          terraform plan -var "databricks_terraform_client_id=$DATABRICKS_CLIENT_ID" -var "databricks_terraform_client_secret=$DATABRICKS_CLIENT_SECRET"
         env:
           ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
           ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}

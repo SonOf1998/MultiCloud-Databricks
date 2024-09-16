@@ -5,7 +5,7 @@ resource "azurerm_databricks_workspace" "databricks_sandbox_workspace" {
   location                    = data.azurerm_resource_group.rg_databricks.location
   sku                         = "premium"
 
-  depends_on = [ databricks_metastore.main_metastore ]
+  depends_on = [databricks_metastore.main_metastore]
 }
 
 resource "databricks_mws_permission_assignment" "sandbox_admin_account_group_workspace_assignment" {

@@ -1,12 +1,7 @@
-resource "azurerm_resource_group" "rg_databricks_storage" {
-  name     = "Databricks-sandbox-storage"
-  location = local.region
-}
-
 resource "azurerm_storage_account" "databricks_storage_account" {
   name                     = "databrickssandboxsa"
-  resource_group_name      = azurerm_resource_group.rg_databricks_storage.name
-  location                 = azurerm_resource_group.rg_databricks_storage.location
+  resource_group_name      = data.azurerm_resource_group.rg_databricks.name
+  location                 = data.azurerm_resource_group.rg_databricks.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
   account_kind             = "StorageV2"
@@ -20,11 +15,11 @@ resource "azurerm_storage_container" "main_metastore_storage_container" {
 }
 
 resource "databricks_metastore" "main_metastore" {
-  name          = "main-metastore"
+  name          = "primary"
   region        = local.region
   force_destroy = true
 
-  storage_root = format("abfss://%s@%s.dfs.core.windows.net/default",
+  storage_root = format("abfss://%s@%s.dfs.core.windows.net/",
     azurerm_storage_container.main_metastore_storage_container.name,
     azurerm_storage_account.databricks_storage_account.name
   )

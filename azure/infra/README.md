@@ -18,4 +18,5 @@
 - Grant admin access to the service principal.
 - As Terraform has low capabilities when it comes to the Databricks account, many activities are required to be done manually 
 (Metastore admin group creation, enabling serverless for Notebooks, Jobs and DLTs etc.). 
+- Create a token pair for Terraform and upload it as **GitHub secret**s: `DATABRICKS_CLIENT_ID`, `DATABRICKS_CLIENT_SECRET`.
 

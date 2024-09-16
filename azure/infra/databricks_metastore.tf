@@ -15,7 +15,7 @@ resource "azurerm_storage_container" "main_metastore_storage_container" {
 }
 
 resource "databricks_metastore" "main_metastore" {
-  name          = "primary"
+  name          = "main-metastore"
   region        = local.region
   force_destroy = true
 

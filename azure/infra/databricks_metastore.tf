@@ -25,7 +25,7 @@ resource "databricks_metastore" "main_metastore" {
   )
 }
 
-resource "databricks_metastore_assignment" "this" {
+resource "databricks_metastore_assignment" "sandbox_workspace_metastore_assignment" {
   metastore_id = databricks_metastore.main_metastore.metastore_id
   workspace_id = azurerm_databricks_workspace.databricks_sandbox_workspace.workspace_id
 }

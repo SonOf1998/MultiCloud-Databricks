@@ -1,11 +1,11 @@
 # Initial setup - Terraform
 - Login to Azure Portal.
 - In Microsoft Entra ID find `App registrations` and create an Application `Terraform`.
-- Save `Application (client) ID` and `Directory (tenant) ID` as **GitHub secret**s.
+- Save `Application (client) ID` and `Directory (tenant) ID` as **GitHub secret**s. These will be `ARM_CLIENT_ID` and `ARM_CLIENT_ID` respectively.
 - On the application's page create a new Client secret using `Certificates & secrets`.
-- Save the value field of the client secret as a **GitHub secret**.
+- Save the value field of the client secret as a **GitHub secret** `ARM_CLIENT_SECRET`.
 - Enter your subscription and choose `IAM`.
-- Save the `Subscription ID` as a **GitHub secret**.
+- Save the `Subscription ID` as a **GitHub secret** `ARM_SUBSCRIPTION_ID`.
 - Assign the **Owner** role to **Terraform**.
 - Create a resource group, a storage account and a container for `.tfstate` files. Use them in `backend.tf`. 
 - Create `backend.tf`, `providers.tf` and `requirements.tf`.

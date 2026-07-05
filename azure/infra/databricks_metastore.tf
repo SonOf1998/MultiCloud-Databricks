@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "databricks_storage_account" {
-  name                     = "databrickssandboxsa"
+  name                     = "databrickssandboxstorageaccnt"
   resource_group_name      = data.azurerm_resource_group.rg_databricks.name
   location                 = data.azurerm_resource_group.rg_databricks.location
   account_tier             = "Standard"

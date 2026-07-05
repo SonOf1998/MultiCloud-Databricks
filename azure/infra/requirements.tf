@@ -1,15 +1,3 @@
 terraform {
-  required_version = "1.9.5"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.67"
-    }
-
-    databricks = {
-      source  = "databricks/databricks"
-      version = "~> 1.51"
-    }
-  }
+  # version is provided in the GitHub action
 }

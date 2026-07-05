@@ -1,14 +1,34 @@
 #!/bin/bash
 
-# Designed for Ubuntu/Debian. 
+TERRAFORM_VERSION="1.15.7"
+DATABRICKS_CLI_VERSION="1.6.0"
 
-# Install latest Terraform
-wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install terraform
+# Detect Architecture (amd64 for Intel, arm64 for Apple Silicon)
+ARCH=$(uname -m)
+if [ "$ARCH" = "x86_64" ]; then
+    TF_ARCH="amd64"
+    DB_ARCH="amd64"
+else
+    TF_ARCH="arm64"
+    DB_ARCH="arm64"
+fi
 
-# Install Databricks CLI 0.228.0
-DATABRICKS_CLI_VERSION=0.228.0
-wget https://github.com/databricks/cli/releases/download/v${DATABRICKS_CLI_VERSION}/databricks_cli_${DATABRICKS_CLI_VERSION}_linux_amd64.zip
-unzip ./databricks_cli_${DATABRICKS_CLI_VERSION}_linux_amd64.zip
-export PATH=$(pwd):$PATH
+echo "Downloading tools for macOS-$ARCH..."
+
+# 1. Install Terraform
+echo "Installing Terraform ${TERRAFORM_VERSION}..."
+curl -LO "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_darwin_${TF_ARCH}.zip"
+unzip "terraform_${TERRAFORM_VERSION}_darwin_${TF_ARCH}.zip"
+sudo mv terraform /usr/local/bin/
+rm "terraform_${TERRAFORM_VERSION}_darwin_${TF_ARCH}.zip"
+
+# 2. Install Databricks CLI
+echo "Installing Databricks CLI ${DATABRICKS_CLI_VERSION}..."
+curl -LO "https://github.com/databricks/cli/releases/download/v${DATABRICKS_CLI_VERSION}/databricks_cli_${DATABRICKS_CLI_VERSION}_darwin_${DB_ARCH}.zip"
+unzip "databricks_cli_${DATABRICKS_CLI_VERSION}_darwin_${DB_ARCH}.zip" "databricks"
+sudo mv databricks /usr/local/bin/
+rm "databricks_cli_${DATABRICKS_CLI_VERSION}_darwin_${DB_ARCH}.zip"
+
+echo "Installation complete!"
+terraform --version
+databricks --version

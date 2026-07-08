@@ -28,3 +28,9 @@ resource "aws_iam_role_policy_attachment" "cross_account" {
   policy_arn = aws_iam_policy.cross_account_policy.arn
   role       = aws_iam_role.cross_account.name
 }
+
+resource "databricks_mws_credentials" "this" {
+  provider         = databricks.mws
+  credentials_name = "${local.prefix}-creds"
+  role_arn         = aws_iam_role.cross_account.arn
+}

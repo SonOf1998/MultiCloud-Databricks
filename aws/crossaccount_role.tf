@@ -4,7 +4,13 @@ resource "aws_iam_policy" "cross_account_policy" {
 }
 
 data "databricks_aws_assume_role_policy" "this" {
+  provider    = databricks.mws
   external_id = var.databricks_account_id
+}
+
+data "databricks_aws_crossaccount_policy" "this" {
+  provider    = databricks.mws
+  policy_type = "customer"
 }
 
 resource "aws_iam_role" "cross_account" {

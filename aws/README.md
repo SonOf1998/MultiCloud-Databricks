@@ -18,7 +18,7 @@
 					"token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
 				},
 				"StringLike": {
-		          "token.actions.githubusercontent.com:sub": "repo:SonfOf1998/MultiCloud-Databricks:*"
+		          "token.actions.githubusercontent.com:sub": "repo:SonOf1998/MultiCloud-Databricks:*"
 		        }
 			}
 		}

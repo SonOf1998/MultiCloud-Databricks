@@ -1,6 +1,6 @@
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.2.0"
+  version = "6.6.1"
 
   name = local.prefix
   cidr = local.cidr_block
@@ -42,26 +42,7 @@ module "vpc_endpoints" {
       route_table_ids = flatten([
         module.vpc.private_route_table_ids,
       module.vpc.public_route_table_ids])
-      tags = {
-        Name = "${local.prefix}-s3-vpc-endpoint"
-      }
-    },
-    sts = {
-      service             = "sts"
-      private_dns_enabled = true
-      subnet_ids          = module.vpc.private_subnets
-      tags = {
-        Name = "${local.prefix}-sts-vpc-endpoint"
-      }
-    },
-    kinesis-streams = {
-      service             = "kinesis-streams"
-      private_dns_enabled = true
-      subnet_ids          = module.vpc.private_subnets
-      tags = {
-        Name = "${local.prefix}-kinesis-vpc-endpoint"
-      }
-    },
+    }
   }
 }
 

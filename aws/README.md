@@ -5,25 +5,27 @@
 
 ```
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Federated": "arn:aws:iam::233231935653:oidc-provider/token.actions.githubusercontent.com"
-      },
-      "Action": "sts:AssumeRoleWithWebIdentity",
-      "Condition": {
-        "StringEquals": {
-          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-          "token.actions.githubusercontent.com:sub": "repo:SonfOf1998/MultiCloud-Databricks:ref:refs/heads/*"
-        }
-      }
-    }
-  ]
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Principal": {
+				"Federated": "arn:aws:iam::233231935653:oidc-provider/token.actions.githubusercontent.com"
+			},
+			"Action": "sts:AssumeRoleWithWebIdentity",
+			"Condition": {
+				"StringEquals": {
+					"token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+				},
+				"StringLike": {
+		          "token.actions.githubusercontent.com:sub": "rrepo:SonfOf1998/MultiCloud-Databricks:*"
+		        }
+			}
+		}
+	]
 }
-
 ```
+
 - Assign AdministratorAccess to the role, name it as `Terraform`.
 - In IAM/IdentityProviders add a new OpenID provider with url `https://token.actions.githubusercontent.com` and audience `sts.amazonaws.com`
 

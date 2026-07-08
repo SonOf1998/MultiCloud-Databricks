@@ -1,0 +1,39 @@
+name: Terraform Plan - AWS
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform_plan_aws:
+    runs-on: ubuntu-latest
+    name: terraform plan - aws
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6.1.0
+        with:
+          role-to-assume: arn:aws:iam::233231935653:role/Terraform
+          aws-region: eu-west-1
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.15.7"
+
+      - name: terraform plan
+        run: |
+          cd ./aws
+          terraform init
+          terraform plan -var "databricks_account_id=$DATABRICKS_ACCOUNT_ID" -var "databricks_terraform_client_id=$DATABRICKS_CLIENT_ID" -var "databricks_terraform_client_secret=$DATABRICKS_CLIENT_SECRET"
+        env:
+          DATABRICKS_ACCOUNT_ID: ${{ secrets.AWS_DATABRICKS_ACCOUNT_ID }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.AWS_DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.AWS_DATABRICKS_CLIENT_SECRET }}

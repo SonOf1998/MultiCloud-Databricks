@@ -20,7 +20,7 @@ jobs:
 
       - name: terraform plan
         run: |
-          cd ./azure/infra
+          cd ./azure
           terraform init
           terraform plan -var "databricks_terraform_client_id=$DATABRICKS_CLIENT_ID" -var "databricks_terraform_client_secret=$DATABRICKS_CLIENT_SECRET"
         env:

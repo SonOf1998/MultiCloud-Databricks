@@ -12,7 +12,7 @@
 - Check `terraform_plan_azure.yaml` to find how credentials are passed.
 
 # Initial setup - Databricks
-- In Microsoft Entra ID create a new user with Global Administrator rights.
+- In Microsoft Entra ID create a new user (non-external) with Global Administrator rights.
 - With this new account visit https://accounts.azuredatabricks.net/
 - Create a new service principal under `User management` called **Terraform**. Specify the `Application (client) ID` from above.
 - Grant admin access to the service principal.

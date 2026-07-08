@@ -25,6 +25,7 @@
 
 ```
 - Assign AdministratorAccess to the role, name it as `Terraform`.
+- In IAM/IdentityProviders add a new OpenID provider with url `https://token.actions.githubusercontent.com` and audience `sts.amazonaws.com`
 
 # Initial setup - Databricks
 - Visit https://accounts.cloud.databricks.com/

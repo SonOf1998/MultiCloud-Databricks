@@ -17,7 +17,7 @@ jobs:
 
       - name: terraform destroy
         run: |
-          cd ./azure/infra
+          cd ./azure
           terraform init
           terraform destroy -var "databricks_terraform_client_id=$DATABRICKS_CLIENT_ID" -var "databricks_terraform_client_secret=$DATABRICKS_CLIENT_SECRET" -auto-approve
         env:

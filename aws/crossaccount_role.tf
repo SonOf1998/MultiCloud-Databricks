@@ -1,3 +1,8 @@
+# The role allows full EC2 access to Databricks
+#
+# Assume role happens with and external_id identical to the Databricks account ID
+# and with a role present in Databricks' AWS account. (see Trust Policy in AWS console)
+
 resource "aws_iam_policy" "cross_account_policy" {
   name   = "${local.prefix}-crossaccount-iam-policy"
   policy = data.databricks_aws_crossaccount_policy.this.json
@@ -22,4 +27,10 @@ resource "aws_iam_role" "cross_account" {
 resource "aws_iam_role_policy_attachment" "cross_account" {
   policy_arn = aws_iam_policy.cross_account_policy.arn
   role       = aws_iam_role.cross_account.name
+}
+
+resource "databricks_mws_credentials" "this" {
+  provider         = databricks.mws
+  credentials_name = "${local.prefix}-creds"
+  role_arn         = aws_iam_role.cross_account.arn
 }
